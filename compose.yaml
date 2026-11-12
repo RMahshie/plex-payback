@@ -1,0 +1,19 @@
+services:
+  payback:
+    image: ghcr.io/rmahshie/plex-payback:latest
+    container_name: payback
+    ports:
+      - "8095:8095"
+    environment:
+      PLEX_URL: http://192.168.1.10:32400 # your Plex server
+      PLEX_TOKEN: your-plex-token
+      TMDB_TOKEN: your-tmdb-api-read-access-token
+      REGION: US                          # streaming availability and default prices
+      TZ: America/Chicago                 # months are counted in this time zone
+      # APP_PASSWORD: pick-one            # ask for a password (any user name)
+    volumes:
+      - payback-data:/data
+    restart: unless-stopped
+
+volumes:
+  payback-data:
